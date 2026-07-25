@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Third_max_num {
+
+    public static int thirdMax(int[] nums) {
+
+        long first = Long.MIN_VALUE;
+        long second = Long.MIN_VALUE;
+        long third = Long.MIN_VALUE;
+
+        for (int num : nums) {
+
+            // Skip duplicate numbers
+            if (num == first || num == second || num == third) {
+                continue;
+            }
+
+            if (num > first) {
+                third = second;
+                second = first;
+                first = num;
+            }
+            else if (num > second) {
+                third = second;
+                second = num;
+            }
+            else if (num > third) {
+                third = num;
+            }
+        }
+
+        // If there is no third distinct maximum,
+        // return the maximum number
+        return (third == Long.MIN_VALUE) ? (int) first : (int) third;
+    }
+
+    public static void main(String[] args) {
+
+        int[] nums = {3, 2, 1};
+
+        int result = thirdMax(nums);
+
+        System.out.println("Third Maximum: " + result);
+    }
+}
